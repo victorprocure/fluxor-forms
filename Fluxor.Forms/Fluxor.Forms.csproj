@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>Update fluxor state from forms</Description>
+    <Version>1.0.0</Version>
+    <Authors>Victor Procure</Authors>
+    <Company>Procure Software Development, Inc.</Company>
+    <Product />
+    <PackageProjectUrl>https://github.com/VictorProcure/fluxor-forms</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/VictorProcure/fluxor-forms/master/Fluxor.Forms/Icons/LibraryIcon.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/VictorProcure/fluxor-forms</RepositoryUrl>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0;net6.0</TargetFramework>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="Icons\LibraryIcon.jpg">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Fluxor" Version="5.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+    <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
+    <PackageReference Include="System.Text.Json" Version="6.0.3" />
+  </ItemGroup>
+</Project>
