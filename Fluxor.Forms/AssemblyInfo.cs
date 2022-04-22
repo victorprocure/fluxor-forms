@@ -1,6 +1,6 @@
-#if NETSTANDARD2_0
+#if NETSTANDARD2_0 || NETSTANDARD2_1 || NETCOREAPP3_1
 namespace System.Runtime.CompilerServices
 {
-    public class IsExternalInit { }
+    internal class IsExternalInit { }
 }
 #endif

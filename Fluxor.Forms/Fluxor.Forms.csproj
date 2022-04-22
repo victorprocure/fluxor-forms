@@ -1,19 +1,20 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Description>Update fluxor state from forms</Description>
     <Version>1.0.0</Version>
     <Authors>Victor Procure</Authors>
     <Company>Procure Software Development, Inc.</Company>
-    <Product />
     <PackageProjectUrl>https://github.com/VictorProcure/fluxor-forms</PackageProjectUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/VictorProcure/fluxor-forms/master/Fluxor.Forms/Icons/LibraryIcon.png</PackageIconUrl>
+	<PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/VictorProcure/fluxor-forms</RepositoryUrl>
+	<RepositoryType>git</RepositoryType>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
   <PropertyGroup>
-    <TargetFramework>netstandard2.0;net6.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;netcoreapp3.1;net5.0;net6.0</TargetFrameworks>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -30,7 +31,11 @@
 
   <ItemGroup>
     <PackageReference Include="Fluxor" Version="5.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
+	<PackageReference Include="Fluxor.Blazor.Web" Version="5.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Forms" Version="3.1.8" />
+	<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.8" />
+	<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.8" />
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
