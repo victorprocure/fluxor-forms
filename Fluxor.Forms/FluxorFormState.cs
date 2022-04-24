@@ -1,11 +1,28 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Fluxor.Forms
 {
     public record FluxorFormState
     {
-        private string? _formName;
+        public FluxorFormInitializationStatus InitializationStatus { get; init; }
 
-        public string FormName { get => _formName ?? throw new InvalidOperationException($"{nameof(FormName)} must be set"); init => _formName = value; }
+        internal IReadOnlyDictionary<Guid, object> FormsModelStorage { get; init; } = new Dictionary<Guid, object>();
+
+        public object? this[Guid formId]
+        {
+            get
+            {
+                try
+                {
+                    var formValues = FormsModelStorage[formId];
+                    return formValues;
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+        }
     }
 }

@@ -1,0 +1,41 @@
+﻿@page "/"
+@inherits FluxorComponent
+@using Fluxor.Blazor.Web.Components
+@using Fluxor.Forms.Samples.Server.Models
+
+@inject IState<FluxorFormState> FormState;
+
+<PageTitle>Index</PageTitle>
+
+<h1>Test Form State</h1>
+
+    @if(FormState.Value[@formModel.ModelId] is TestFormEditModel formState)
+    {
+        <p>
+        FirstName = @formState.FirstName<br />
+        LastName = @formState.LastName<br />
+        Favorite Colour = @formState.FavoriteColour
+        </p>
+    }
+
+<FluxorForm FormId="@formModel.ModelId" UpdateStateWhenInvalid="true" InitialValues="@formModel">
+    <DataAnnotationsValidator />
+    <InputText @bind-Value="context.FirstName" DisplayName="First Name" />
+    <InputText @bind-Value="context.LastName" DisplayName="Last Name" />
+    <InputSelect @bind-Value="context.FavoriteColour" DisplayName="Favorite Colour">
+        <option>Blue</option>
+        <option>Green</option>
+        <option>Red</option>
+        <option>Brown</option>
+    </InputSelect>
+</FluxorForm>
+
+
+@code{
+    private TestFormEditModel formModel = new()
+    {
+        FirstName = "Default Name",
+        LastName = "",
+        FavoriteColour = "Red"
+    };
+}

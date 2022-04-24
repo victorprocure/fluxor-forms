@@ -5,6 +5,8 @@ VisualStudioVersion = 17.1.32414.318
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluxor.Forms", "Fluxor.Forms\Fluxor.Forms.csproj", "{4DA26050-A731-4A31-8E2F-011EA99F14F9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluxor.Forms.Samples.Server", "Fluxor.Forms.Samples.Server\Fluxor.Forms.Samples.Server.csproj", "{C155A868-FDF1-4ADF-B53A-CD151883379E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{4DA26050-A731-4A31-8E2F-011EA99F14F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4DA26050-A731-4A31-8E2F-011EA99F14F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4DA26050-A731-4A31-8E2F-011EA99F14F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C155A868-FDF1-4ADF-B53A-CD151883379E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C155A868-FDF1-4ADF-B53A-CD151883379E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C155A868-FDF1-4ADF-B53A-CD151883379E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C155A868-FDF1-4ADF-B53A-CD151883379E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,16 +1,16 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Fluxor.Blazor.Web.Components;
+using Fluxor.Forms.Actions;
+using Fluxor.Forms.Utilities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Rendering;
-#if NET5_0_OR_GREATER
-using System.Diagnostics.CodeAnalysis;
-#endif
 
 namespace Fluxor.Forms
 {
-    public class FluxorForm : FluxorComponent
+    public class FluxorForm<TFormModel> : FluxorComponent
     {
         private EditContext? _editContext;
         private IDispatcher? _dispatcher;
@@ -26,17 +26,23 @@ namespace Fluxor.Forms
         [NotNullIfNotNull(nameof(_editContext))]
 #endif
         [Parameter]
-        public object? InitialValues { get; set; }
+        public TFormModel InitialValues { get => _initialValues ?? throw new InvalidOperationException($"{nameof(InitialValues)} cannot be null"); set => _initialValues = value; }
 
         [Parameter]
-        public RenderFragment<EditContext>? ChildContent { get; set; }
+        public RenderFragment<TFormModel>? ChildContent { get; set; }
 
         [Parameter]
         public bool UpdateStateWhenInvalid { get; set; } = false;
 
+        [Parameter]
+        public Guid FormId { get; set; } = Guid.NewGuid();
+
         [Parameter(CaptureUnmatchedValues = true)]
         public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
 
+
+        private TFormModel? _internalMutableModel;
+        private TFormModel? _initialValues;
 
         protected override void OnParametersSet()
         {
@@ -45,9 +51,34 @@ namespace Fluxor.Forms
                 throw new InvalidOperationException($"{nameof(InitialValues)} cannot be null.");
             }
 
-            if (InitialValues is not null && InitialValues != _editContext?.Model)
+            if (_editContext?.Model is not TFormModel)
             {
-                _editContext = new EditContext(InitialValues);
+                _internalMutableModel = InitialValues.DeepCopy();
+                var immutableModel = InitialValues.DeepCopy();
+                _editContext = new EditContext(_internalMutableModel);
+                _editContext.OnFieldChanged += OnFormFieldChanged;
+
+                Dispatcher.Dispatch(new FluxorFormCreated(FormId, immutableModel!));
+            }
+        }
+
+        private void OnFormFieldChanged(object? sender, FieldChangedEventArgs e)
+        {
+            if (_editContext is null)
+            {
+                throw new InvalidOperationException($"{nameof(_editContext)} cannot be null");
+            }
+            if (_internalMutableModel is null)
+            {
+                throw new InvalidOperationException($"{nameof(_internalMutableModel)} cannot be null");
+            }
+
+            var isValid = _editContext.Validate();
+
+            if ((!UpdateStateWhenInvalid && isValid) || UpdateStateWhenInvalid)
+            {
+                var immutableModel = _internalMutableModel.DeepCopy();
+                Dispatcher.Dispatch(new FluxorFormFieldChanged(FormId, e.FieldIdentifier.FieldName, immutableModel!));
             }
         }
 
@@ -58,6 +89,11 @@ namespace Fluxor.Forms
                 throw new InvalidOperationException($"{nameof(_editContext)} cannot be null");
             }
 
+            if (_internalMutableModel is null)
+            {
+                throw new InvalidOperationException($"{nameof(_internalMutableModel)} cannot be null");
+            }
+
             builder.OpenRegion(_editContext.GetHashCode());
 
             builder.OpenElement(0, "form");
@@ -65,7 +101,7 @@ namespace Fluxor.Forms
             builder.OpenComponent<CascadingValue<EditContext>>(2);
             builder.AddAttribute(3, "IsFixed", true);
             builder.AddAttribute(4, "Value", _editContext);
-            builder.AddAttribute(5, "ChildContent", ChildContent?.Invoke(_editContext));
+            builder.AddAttribute(5, "ChildContent", ChildContent?.Invoke(_internalMutableModel));
             builder.CloseComponent();
             builder.CloseElement();
 
