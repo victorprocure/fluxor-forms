@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluxor.Forms", "Fluxor.Form
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluxor.Forms.Samples.Server", "Fluxor.Forms.Samples.Server\Fluxor.Forms.Samples.Server.csproj", "{C155A868-FDF1-4ADF-B53A-CD151883379E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluxor.Forms.Samples.Wasm", "Fluxor.Forms.Samples.Wasm\Fluxor.Forms.Samples.Wasm.csproj", "{5069C389-2AE5-4653-AB24-913240A82F32}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C155A868-FDF1-4ADF-B53A-CD151883379E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C155A868-FDF1-4ADF-B53A-CD151883379E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C155A868-FDF1-4ADF-B53A-CD151883379E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5069C389-2AE5-4653-AB24-913240A82F32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5069C389-2AE5-4653-AB24-913240A82F32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5069C389-2AE5-4653-AB24-913240A82F32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5069C389-2AE5-4653-AB24-913240A82F32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
