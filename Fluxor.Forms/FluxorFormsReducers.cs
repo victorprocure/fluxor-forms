@@ -30,5 +30,18 @@ namespace Fluxor.Forms
 
             return currentState with { FormsModelStorage = updatableFormsDictionary };
         }
+
+        [ReducerMethod]
+        public static FluxorFormState ReduceFluxorFormDisposing(FluxorFormState currentState, FluxorFormDisposing action)
+        {
+            var updatableFormsDictionary = currentState.FormsModelStorage.ToDictionary(k => k.Key, v => v.Value);
+            if (!updatableFormsDictionary.ContainsKey(action.FormId))
+            {
+                return currentState;
+            }
+
+            updatableFormsDictionary.Remove(action.FormId);
+            return currentState with { FormsModelStorage = updatableFormsDictionary };
+        }
     }
 }

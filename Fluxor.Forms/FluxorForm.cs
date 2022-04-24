@@ -107,5 +107,13 @@ namespace Fluxor.Forms
 
             builder.CloseRegion();
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                Dispatcher.Dispatch(new FluxorFormDisposing(FormId));
+            }
+        }
     }
 }
