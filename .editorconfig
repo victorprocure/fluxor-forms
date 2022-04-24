@@ -1,22 +1,18 @@
 # Remove the line below if you want to inherit .editorconfig settings from higher directories
 root = true
+# Default settings:
+# A newline ending every file
+# Use 4 spaces as indentation
+[*]
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = true
+
+[*{_AssemblyInfo.cs,.notsupported.cs,AsmOffsets.cs}]
+generated_code = true
 
 # C# files
 [*.cs]
-
-#### Core EditorConfig Options ####
-
-# Indentation and spacing
-indent_size = 4
-indent_style = space
-tab_width = 4
-
-# New line preferences
-end_of_line = crlf
-insert_final_newline = false
-
-#### .NET Coding Conventions ####
-
 # Organize usings
 dotnet_separate_import_directive_groups = false
 dotnet_sort_system_directives_first = true
@@ -220,3 +216,7 @@ dotnet_naming_style.camelcase.required_prefix =
 dotnet_naming_style.camelcase.required_suffix = 
 dotnet_naming_style.camelcase.word_separator = 
 dotnet_naming_style.camelcase.capitalization = camel_case
+
+[*.csproj]
+indent_size = 2
+charset = utf-8
